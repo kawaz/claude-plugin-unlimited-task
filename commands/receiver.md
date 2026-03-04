@@ -1,4 +1,16 @@
-# Receiver ループ指示
+---
+description: receiver ループを開始（タスク自動消化）
+allowed-tools: ["Bash", "Read", "Write", "Edit", "Glob", "Grep", "Skill"]
+---
+
+# unlimited-task:receiver
+
+**FIRST**: Skill ツールで `unlimited-task` スキルをロードし、以下を理解すること:
+- config.yaml 仕様（receiver セクション）
+- receiver-state.yaml 仕様
+- タスク状態遷移
+- receiver の安全制約
+- アトミック書き込みパターン
 
 あなたは unlimited-task の **receiver** です。sender が生成したタスクを取得し、実行し、レポートを作成する役割です。
 
@@ -37,14 +49,14 @@
 
 `acquired/` 内の全ファイルについて:
 - receiver-state.yaml の `acquired_at` と現在時刻を比較
-- `acquired_timeout_seconds`（デフォルト 3600 秒）を超えていれば `instructions/` に戻す
+- `receiver.acquired_timeout_seconds`（デフォルト 3600 秒）を超えていれば `instructions/` に戻す
 - ログに警告を記録
 
 ### 3. タスク選択
 
-1. `instructions/` 内のファイルを確認
-2. ファイルがなければ `sleep_seconds` 秒待機してステップ1に戻る
-3. `category_balance` が true の場合:
+1. `.unlimited-task/instructions/` 内のファイルを確認
+2. ファイルがなければ `receiver.sleep_seconds` 秒待機してステップ1に戻る
+3. `receiver.category_balance` が true の場合:
    - receiver-state.yaml の `last_category` を確認
    - 異なるカテゴリを優先的に選択
    - 全カテゴリが空なら任意のカテゴリから選択
@@ -60,7 +72,7 @@
 
 1. タスクファイルの指示を読み込む
 2. 指示に従ってタスクを実行
-   - 新規ドキュメントは `{drafts_dir}/` に配置
+   - 新規ドキュメントは `receiver.drafts_dir` に配置
    - コードは適切な場所に配置
    - テスト・ビルドが指示に含まれていれば実行
 3. エラーが発生した場合:
@@ -101,18 +113,11 @@
 
 ### 7. スリープ
 
-`sleep_seconds` 秒待機。その後ステップ1に戻る。
-
-## アトミック書き込みパターン
-
-state ファイルの更新は必ず以下のパターンで行う:
-
-1. 新しい内容を `{file}.tmp` に書く
-2. `mv {file}.tmp {file}` でアトミックに置換
+`receiver.sleep_seconds` 秒待機。その後ステップ1に戻る。
 
 ## auto-compact 復帰
 
-compact 後にこのファイルが再読み込みされる。以下から復帰:
+compact 後にこのコマンドが再実行される。以下から復帰:
 - receiver-state.yaml の `current_task` → 作業中タスクの継続
 - receiver-state.yaml の `last_category` → カテゴリバランスの維持
 - acquired/ / done/ / failed/ / instructions/ のファイル状態が ground truth
