@@ -2,13 +2,8 @@
   "name": "unlimited-task",
   "version": "0.1.0",
   "description": "自律的なタスク生成・消化ループを回す Claude Code プラグイン",
-  "author": "kawaz",
-  "license": "MIT",
-  "skills": [
-    {
-      "name": "unlimited-task",
-      "path": "skills/unlimited-task/SKILL.md",
-      "description": "sender/receiver パターンで無制限タスクを自律実行"
-    }
-  ]
+  "author": {
+    "name": "kawaz"
+  },
+  "license": "MIT"
 }

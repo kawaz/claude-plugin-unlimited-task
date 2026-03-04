@@ -1,6 +1,17 @@
 {
-  "repository": "kawaz/claude-plugin-unlimited-task",
-  "homepage": "https://github.com/kawaz/claude-plugin-unlimited-task",
-  "tags": ["automation", "task-management", "autonomous"],
-  "category": "productivity"
+  "name": "claude-plugin-unlimited-task",
+  "owner": {
+    "name": "kawaz"
+  },
+  "metadata": {
+    "description": "自律的なタスク生成・消化ループを回す Claude Code プラグイン",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "unlimited-task",
+      "description": "sender/receiver パターンで無制限タスクを自律実行",
+      "source": "./"
+    }
+  ]
 }

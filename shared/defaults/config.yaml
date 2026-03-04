@@ -1,5 +1,5 @@
 # unlimited-task 設定ファイル
-# /unlimited-task start 時に .unlimited-task/config.yaml としてコピーされます
+# /unlimited-task:start 実行時に .unlimited-task/config.yaml としてコピーされます
 
 # プロジェクト情報（sender がお題を作る際のコンテキスト）
 project:

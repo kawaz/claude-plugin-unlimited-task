@@ -22,7 +22,7 @@ claude plugin install unlimited-task@claude-plugin-unlimited-task
 
 ```bash
 # プロジェクトのリポジトリ内で実行
-/unlimited-task start
+/unlimited-task:start
 ```
 
 ワークスペースと `.unlimited-task/` ディレクトリが作成されます。
@@ -33,22 +33,22 @@ claude plugin install unlimited-task@claude-plugin-unlimited-task
 
 ```bash
 # ターミナル1: sender（タスク生成）
-(cd {workspace_path} && claude /unlimited-task sender)
+(cd {workspace_path} && claude /unlimited-task:sender)
 
 # ターミナル2: receiver（タスク消化）
-(cd {workspace_path} && claude /unlimited-task receiver)
+(cd {workspace_path} && claude /unlimited-task:receiver)
 ```
 
 ### 進捗確認
 
 ```bash
-/unlimited-task status
+/unlimited-task:status
 ```
 
 ### 設定変更
 
 ```bash
-/unlimited-task config
+/unlimited-task:config
 ```
 
 ### 緊急停止

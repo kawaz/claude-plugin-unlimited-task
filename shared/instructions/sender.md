@@ -27,7 +27,7 @@
    - `.unlimited-task/done/{category}/` 内のファイル
    - `.unlimited-task/failed/{category}/` 内のファイル
 4. `batch_size` 個のお題を生成:
-   - テンプレートファイル（同プラグイン内の `templates/instruction-{category}.md`）を参照して形式を合わせる
+   - テンプレートファイルを参照して形式を合わせる（テンプレートのパスは sender SKILL.md で案内済み）
    - `guidance` があれば方向性を反映
    - プロジェクトのコンテキストに基づいた実用的なお題にする
    - カテゴリはバランスよく（前回のバッチと異なるカテゴリを優先）
